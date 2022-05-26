@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 /* ******************************************************
 * CIS 123: Introduction to Object-Oriented Programming  *
@@ -26,10 +27,17 @@ namespace InvoiceTotal
         {
             InitializeComponent();
         }
+/* ******************************************************************
+*   2. Declare 2 class variables
+*       A. An array that hold up tp 5 invoice totals
+*       B. An index that can be used to work with the array
+* ********************************************************* Tepper */
+        
+        decimal[] totalsArray = new decimal[5];       // 2A
+        int totalsIndex = 0;                          // 2B
 
-        // TODO: declare class variables for array and list here
 
-        private void btnCalculate_Click(object sender, EventArgs e)
+    private void btnCalculate_Click(object sender, EventArgs e)
         {
             try
             {
@@ -44,6 +52,7 @@ namespace InvoiceTotal
                     decimal subtotal = Decimal.Parse(txtSubtotal.Text);
                     if (subtotal > 0 && subtotal < 10000)
                     {
+
                         decimal discountPercent = 0m;
                         if (subtotal >= 500)
                             discountPercent = .2m;
@@ -56,6 +65,14 @@ namespace InvoiceTotal
 
                         discountAmount = Math.Round(discountAmount, 2);
                         invoiceTotal = Math.Round(invoiceTotal, 2);
+
+/* ******************************************************************
+*   3. Add code that adds the invoice total to the next element in
+*     the array each time the user clicks the Calculate button
+* ********************************************************* Tepper */
+
+                        totalsArray[totalsIndex] = invoiceTotal;
+                        totalsIndex++;
 
                         txtDiscountPercent.Text = discountPercent.ToString("p1");
                         txtDiscountAmount.Text = discountAmount.ToString();
