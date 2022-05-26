@@ -31,13 +31,16 @@ namespace InvoiceTotal
 *   2. Declare 2 class variables
 *       A. An array that hold up tp 5 invoice totals
 *       B. An index that can be used to work with the array
+*       
+*   9-A. Modify the code to use a list to hold the invoice totals
 * ********************************************************* Tepper */
         
         decimal[] totalsArray = new decimal[5];       // 2A
         int totalsIndex = 0;                          // 2B
 
+        List<decimal> totalsList = new List<decimal>();  // 9-A
 
-    private void btnCalculate_Click(object sender, EventArgs e)
+        private void btnCalculate_Click(object sender, EventArgs e)
         {
             try
             {
@@ -69,10 +72,14 @@ namespace InvoiceTotal
 /* ******************************************************************
 *   3. Add code that adds the invoice total to the next element in
 *     the array each time the user clicks the Calculate button
+*   
+*   9-B. Add code that adds a new invoice total to the list
 * ********************************************************* Tepper */
 
-                        totalsArray[totalsIndex] = invoiceTotal;
+                        totalsArray[totalsIndex] = invoiceTotal;    // 3. add to array
                         totalsIndex++;
+
+                        totalsList.Add(invoiceTotal);              // 9-B add to list
 
                         txtDiscountPercent.Text = discountPercent.ToString("p1");
                         txtDiscountAmount.Text = discountAmount.ToString();
@@ -118,15 +125,30 @@ namespace InvoiceTotal
             *       within the foreach loop
             *       
             *  7. Sort the invoice totals in the array
+            *  
+            *  9-C. Add a second foreach loop to format and display the totals
+            *       stored in the list in a second message box.
             * ********************************************************* Tepper */
 
             Array.Sort(totalsArray);                        // Step 7
-            string message = "These are the 5 most recent totals:" + "\n";
+            string message = "Totals in the array" + "\n";
             foreach (decimal total in totalsArray)          // 4-A
             {
                 if (total != 0)                             // 4-B only totals != 0
                 {
                     message += total.ToString("c") + "\n";
+                }
+            }
+            MessageBox.Show(message, "Order Totals - Array");
+
+            
+            totalsList.Sort();
+            string message2 = "Totals in the list" + "\n";    // 9-C.
+            foreach (decimal total in totalsList)
+            {
+                if (total != 0)
+                {
+                    message2 += total.ToString("c") + "\n";
                 }
             }
             MessageBox.Show(message, "Order Totals - Array");
