@@ -93,6 +93,17 @@ namespace InvoiceTotal
                     "Please enter a valid number for the Subtotal field.",
                     "Entry Error");
             }
+
+/* *****************************************************************************
+*   6. Modify the try-catch statement to handle an IndexOutOfRangeException
+* ******************************************************************** Tepper */
+
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Array entries must not exceed 5.",
+                    "Input Limit Reached");
+            }
+
             txtSubtotal.Focus();
         }
 
@@ -105,9 +116,11 @@ namespace InvoiceTotal
             *       
             *  4-B. Include an if statement that will only display totals != 0
             *       within the foreach loop
+            *       
+            *  7. Sort the invoice totals in the array
             * ********************************************************* Tepper */
 
-            Array.Sort(totalsArray);
+            Array.Sort(totalsArray);                        // Step 7
             string message = "These are the 5 most recent totals:" + "\n";
             foreach (decimal total in totalsArray)          // 4-A
             {
