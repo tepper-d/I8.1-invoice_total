@@ -98,7 +98,25 @@ namespace InvoiceTotal
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            // TODO: add code that displays dialog boxes here
+
+            /* ******************************************************************
+            *  4-A. Add code that displays all the invoice totals in the array in
+            *       a message box when the user clicks the Exit button.
+            *       
+            *  4-B. Include an if statement that will only display totals != 0
+            *       within the foreach loop
+            * ********************************************************* Tepper */
+
+            Array.Sort(totalsArray);
+            string message = "These are the 5 most recent totals:" + "\n";
+            foreach (decimal total in totalsArray)          // 4-A
+            {
+                if (total != 0)                             // 4-B only totals != 0
+                {
+                    message += total.ToString("c") + "\n";
+                }
+            }
+            MessageBox.Show(message, "Order Totals - Array");
 
             this.Close();
         }
